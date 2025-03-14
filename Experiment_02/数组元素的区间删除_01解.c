@@ -1,3 +1,5 @@
+/* 双指针(快慢指针) 解法
+
 int Delete( int A[], int L, int minA, int maxA )
 {
     int slow, fast;
