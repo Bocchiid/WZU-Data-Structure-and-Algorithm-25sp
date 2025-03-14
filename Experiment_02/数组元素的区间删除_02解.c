@@ -1,3 +1,5 @@
+/* 条件筛法 */
+
 int Delete( int A[], int L, int minA, int maxA )
 {
     int i;
