@@ -6,6 +6,7 @@ struct stud_node *createlist()
     int num;
 
     scanf("%d", &num);
+    
     while (num != 0)
     {
         s = (struct stud_node*)malloc(sizeof(struct stud_node) * 1);
