@@ -28,7 +28,7 @@ int main()
     {
         if (x.b != 0)
         {
-            x.a = x.a * x.b;
+            x.a *= x.b;
             x.b -= 1;
             s = (node*)malloc(sizeof(node) * 1);
             s->val = x;
