@@ -1,7 +1,10 @@
 ElementType Find( List L, int m )
 {
-    List slow, fast;
+    if (L->Next == NULL) /* 空链表的情况, 但题目没有考虑 */
+        return ERROR;
+
     int i;
+    List slow, fast;
 
     slow = fast = L;
 
@@ -10,7 +13,7 @@ ElementType Find( List L, int m )
 
     if (i != m)
         return ERROR;
-    
+
     while (fast)
     {
         fast = fast->Next;
