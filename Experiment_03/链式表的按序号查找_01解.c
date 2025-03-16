@@ -3,19 +3,18 @@ ElementType FindKth( List L, int K )
     if (K < 1)
         return ERROR;
 
-    int cnt = 1;
     List p;
 
     p = L;
 
-    while (p)
-    {
-        if (cnt == K)
-            return p->Data;
+    for (int i = 1; i < K; i++)
+        if (p)
+            p = p->Next;
+        else
+            return ERROR;
 
-        cnt++;
-        p = p->Next;
-    }
-
-    return ERROR;
+    if (p)
+        return p->Data;
+    else
+        return ERROR;
 }
