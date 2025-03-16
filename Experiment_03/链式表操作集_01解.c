@@ -1,3 +1,5 @@
+/* 该解法为带虚拟头节点的解法, 所以不需要进行特判 */
+
 Position Find( List L, ElementType X )
 {
     Position p;
@@ -15,11 +17,10 @@ Position Find( List L, ElementType X )
     return ERROR;
 }
 List Insert( List L, ElementType X, Position P )
-{    // dummy(虚拟头节点)的做法
+{
     List dummy = (List)malloc(sizeof(struct LNode) * 1);
     dummy->Next = L;
     Position p, q;
-    Position s;
 
     q = dummy;
     p = dummy->Next; // p = L;
@@ -35,7 +36,7 @@ List Insert( List L, ElementType X, Position P )
 
     if (p == P)
     {
-        s = (Position)malloc(sizeof(struct LNode) * 1);
+        Position s = (Position)malloc(sizeof(struct LNode) * 1);
         s->Data = X;
         s->Next = q->Next;
         q->Next = s;
@@ -50,7 +51,7 @@ List Insert( List L, ElementType X, Position P )
     }
 }
 List Delete( List L, Position P )
-{    // dummy(虚拟头节点)的做法
+{
     List dummy = (List)malloc(sizeof(struct LNode) * 1);
     dummy->Next = L;
     Position p, q;
@@ -67,7 +68,7 @@ List Delete( List L, Position P )
         p = p->Next;
     }
 
-    if (p) // p == P
+    if (p == P) // if (p)也行
     {
         q->Next = p->Next;
         free(p); // 这句话可以不要
