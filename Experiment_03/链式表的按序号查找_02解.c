@@ -2,7 +2,7 @@ ElementType FindKth( List L, int K )
 {
     if (K < 1)
         return ERROR;
-    
+    /* 上面这段特判可以不要, 因为若K < 1, while只会在p == NULL时退出 */
     int cnt = 1;
     List p;
 
@@ -11,14 +11,11 @@ ElementType FindKth( List L, int K )
     while (p)
     {
         if (cnt == K)
-            break;
+            return p->Data;
 
         cnt++;
         p = p->Next;
     }
 
-    if (p == NULL) // 判断p是否指向有效结点
-        return ERROR;
-    // 若p指向有效结点, 则p一定指向第k个结点
-    return p->Data;
+    return ERROR;
 }
