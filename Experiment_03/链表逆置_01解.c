@@ -1,6 +1,9 @@
+/* typedef用不用都行, 看个人习惯 */
+
 struct ListNode *reverse( struct ListNode *head )
 {
-    struct ListNode *p, *q, *next;
+    typedef struct ListNode node;
+    node *p, *q, *next;
 
     q = NULL;
     p = head;
@@ -15,5 +18,5 @@ struct ListNode *reverse( struct ListNode *head )
 
     head = q;
 
-    return head;
+    return head; // 或者直接返回q也行(return q;)
 }
