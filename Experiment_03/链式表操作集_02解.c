@@ -1,3 +1,5 @@
+/* 该解法为不带头结点的解法, 所以尤其是对头节点的操作需进行对应情况的特判 */
+
 Position Find( List L, ElementType X )
 {
     Position p;
@@ -15,22 +17,21 @@ Position Find( List L, ElementType X )
     return ERROR;
 }
 List Insert( List L, ElementType X, Position P )
-{    // 不带dummy(虚拟头节点)的做法, 需进行特判
-    Position s;
-
-    if (P == L) // 在第一个结点前插入新的结点
+{
+    if (L == P) /* 插入在头节点之前 */
     {
-        s = (Position)malloc(sizeof(struct LNode) * 1);
+        Position s = (Position)malloc(sizeof(struct LNode) * 1);
         s->Data = X;
-        s->Next = L;
+        s->Next = L; // s->Next = P;
+        L = s;
 
-        return s;
+        return L; // 当然也可以直接return s;
     }
 
     Position p, q;
 
     q = L;
-    p = L->Next;
+    p = L->Next; // p = q->Next;
 
     while (p)
     {
@@ -43,7 +44,7 @@ List Insert( List L, ElementType X, Position P )
 
     if (p == P)
     {
-        s = (Position)malloc(sizeof(struct LNode) * 1);
+        Position s = (Position)malloc(sizeof(struct LNode) * 1);
         s->Data = X;
         s->Next = q->Next;
         q->Next = s;
@@ -58,20 +59,18 @@ List Insert( List L, ElementType X, Position P )
     }
 }
 List Delete( List L, Position P )
-{    // 不带dummy(虚拟头节点)的做法, 需进行特判
-    if (L == NULL) // 空链表应该删除失败, 但题目没有考虑
+{    /* 题目不严谨, 没有考虑空表的情况 */
+    if (L == P) /* 删除头结点 */
     {
-        printf("Wrong Positon for Deletion");
+        L = L->Next;
 
-        return ERROR;
-    } // 上面这一块代码不写也可以过OJ
-    else if (P == L) // 删除的结点为第一个结点, 且链表不为空
-        return L->Next;
+        return L;
+    }
 
     Position p, q;
 
     q = L;
-    p = L->Next;
+    p = L->Next; // p = q->Next;
 
     while (p)
     {
@@ -82,10 +81,10 @@ List Delete( List L, Position P )
         p = p->Next;
     }
 
-    if (p)
+    if (p == P) // if (p)也行
     {
         q->Next = p->Next;
-        free(p); // 这句话可以不要
+        free(p); // 这句话不要也行
 
         return L;
     }
