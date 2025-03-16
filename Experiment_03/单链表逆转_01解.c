@@ -2,7 +2,7 @@ List Reverse( List L )
 {
     List p, q, next;
 
-    q = NULL; // q = nullptr;
+    q = NULL;
     p = L;
 
     while (p)
@@ -15,5 +15,5 @@ List Reverse( List L )
 
     L = q;
 
-    return L;
+    return L; // 直接返回q也行(return q;)
 }
