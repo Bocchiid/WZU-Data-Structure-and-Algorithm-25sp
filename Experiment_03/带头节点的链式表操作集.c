@@ -9,7 +9,7 @@ Position Find( List L, ElementType X )
 {
     Position p;
 
-    p = L->Next;
+    p = L;
 
     while (p)
     {
@@ -24,7 +24,6 @@ Position Find( List L, ElementType X )
 bool Insert( List L, ElementType X, Position P )
 {
     Position p, q;
-    Position s;
 
     q = L;
     p = L->Next; // p = q->Next;
@@ -40,7 +39,7 @@ bool Insert( List L, ElementType X, Position P )
 
     if (p == P)
     {
-        s = (Position)malloc(sizeof(struct LNode) * 1);
+        Position s = (Position)malloc(sizeof(struct LNode) * 1);
         s->Data = X;
         s->Next = q->Next;
         q->Next = s;
@@ -70,7 +69,7 @@ bool Delete( List L, Position P )
         p = p->Next;
     }
 
-    if (p)
+    if (p == P) // if (p)也行
     {
         q->Next = p->Next;
         free(p); // 这句话可以不要
