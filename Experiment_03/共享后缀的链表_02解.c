@@ -2,7 +2,7 @@ PtrToNode Suffix( List L1, List L2 )
 {
     int length1 = 0;
     int length2 = 0;
-    List p;
+    List p, q;
 
     p = L1;
 
@@ -12,15 +12,13 @@ PtrToNode Suffix( List L1, List L2 )
         p = p->Next;
     }
 
-    p = L2;
+    q = L2;
 
-    while (p)
+    while (q)
     {
         length2++;
-        p = p->Next;
+        q = q->Next;
     }
-
-    List q;
 
     p = L1;
     q = L2;
@@ -39,8 +37,8 @@ PtrToNode Suffix( List L1, List L2 )
     while (p && q)
     {
         if (p == q)
-            break; // return p; | return q;
-
+            break; // 或者直接return p; | return q;
+        
         p = p->Next;
         q = q->Next;
     }
