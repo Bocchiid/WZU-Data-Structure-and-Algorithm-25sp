@@ -12,10 +12,11 @@ void K_Reverse( List L, int K )
     }
 
     List q, next;
+    List qtail, tail;
+
     p = L->Next;
-    List tail, qtail;
     qtail = L;
-    tail = L->Next;
+    tail = L->Next; // qtail->Next;
 
     while (length >= K)
     {
