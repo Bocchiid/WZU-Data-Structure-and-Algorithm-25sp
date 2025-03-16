@@ -1,15 +1,19 @@
+/* 该解法为带头节点链表的解法, 推荐使用带头结点链表, 不然有你好受的 */
+/* typedef用一下, 不然代码太长了, 写起来有你好受的 */
+
 struct stud_node *createlist()
 {
-    struct stud_node *L = (struct stud_node*)malloc(sizeof(struct stud_node) * 1);
-    struct stud_node *s;
-    struct stud_node *tail = L;
+    typedef struct stud_node node;
+    node *dummy = (node*)malloc(sizeof(node) * 1);
+    node *s;
+    node *tail = dummy;
     int num;
 
     scanf("%d", &num);
-    
-    while (num != 0)
+
+    while (num != 0) // while (num)也行
     {
-        s = (struct stud_node*)malloc(sizeof(struct stud_node) * 1);
+        s = (node*)malloc(sizeof(node) * 1);
         s->num = num;
         scanf("%s %d", s->name, &s->score);
         tail->next = s;
@@ -17,13 +21,14 @@ struct stud_node *createlist()
         scanf("%d", &num);
     }
 
-    return L->next;
+    return dummy->next;
 }
 struct stud_node *deletelist( struct stud_node *head, int min_score )
 {
-    struct stud_node *dummy = (struct stud_node*)malloc(sizeof(struct stud_node) * 1);
+    typedef struct stud_node node;
+    node *dummy = (node*)malloc(sizeof(node) * 1);
     dummy->next = head;
-    struct stud_node *p, *q;
+    node *p, *q;
 
     q = dummy;
     p = dummy->next; // p = head;
