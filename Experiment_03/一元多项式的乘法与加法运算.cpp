@@ -16,105 +16,48 @@ struct node
     {
         val.x = 0;
         val.y = 0;
-        next = nullptr;
+        next = nullptr; // next = NULL;
     }
 
-    node(int x, int y)
+    node(item that)
     {
-        val.x = x;
-        val.y = y;
+        val.x = that.x;
+        val.y = that.y;
         next = nullptr;
     }
 };
 
 int main()
 {
+    item x;
     node *l1 = new node();
     node *l2 = new node();
-    int i;
-    int n;
-    int x, y;
     node *s;
-    node *tail1 = l1;
-    node *tail2 = l2;
+    node *t1 = l1;
+    node *t2 = l2;
+    int n;
 
     cin >> n;
 
-    for (i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
     {
-        cin >> x >> y;
-        s = new node(x, y);
-        tail1->next = s;
-        tail1 = s;
+        cin >> x.x >> x.y;
+        s = new node(x);
+        t1->next = s;
+        t1 = s;
     }
 
     cin >> n;
 
-    for (i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
     {
-        cin >> x >> y;
-        s = new node(x, y);
-        tail2->next = s;
-        tail2 = s;
+        cin >> x.x >> x.y;
+        s = new node(x);
+        t2->next = s;
+        t2 = s;
     }
 
     node *p, *q;
-    node *plus = new node();
-    node *tailp = plus;
-
-    p = l1->next;
-    q = l2->next;
-
-    while (p && q)
-    {
-        if (p->val.y == q->val.y)
-        {
-            if (p->val.x + q->val.x != 0)
-            {
-                s = new node (p->val.x + q->val.x, p->val.y);
-                tailp->next = s;
-                tailp = s;
-                p = p->next;
-                q = q->next;
-            }
-            else
-            {
-                p = p->next;
-                q = q->next;
-            }
-        }
-        else if(p->val.y > q->val.y)
-        {
-            s = new node(p->val.x, p->val.y);
-            tailp->next = s;
-            tailp = s;
-            p = p->next;
-        }
-        else
-        {
-            s = new node(q->val.x, q->val.y);
-            tailp->next = s;
-            tailp = s;
-            q = q->next;
-        }
-    }
-
-    while (p)
-    {
-        s = new node (p->val.x, p->val.y);
-        tailp->next = s;
-        tailp = s;
-        p = p->next;
-    }
-
-    while (q)
-    {
-        s = new node(q->val.x, q->val.y);
-        tailp->next = s;
-        tailp = s;
-        q = q->next;
-    }
-
     node *product = new node();
 
     p = l1->next;
@@ -129,90 +72,147 @@ int main()
 
             x.x = p->val.x * q->val.x;
             x.y = p->val.y + q->val.y;
-            
-            node *qf = product;
-            node *f = product->next;
+
+            node *f, *qf;
+
+            qf = product;
+            f = product->next; // f = qf->next;
 
             while (f)
             {
                 if (f->val.y <= x.y)
                     break;
-                
+
                 qf = f;
                 f = f->next;
             }
 
-            if (f)
+            if (qf->next) // if (f)也行
             {
                 if (f->val.y == x.y)
                 {
-                    if (f->val.x + x.x != 0)
+                    int num;
+
+                    num = f->val.x + x.x;
+
+                    if (num)
                         f->val.x += x.x;
                     else
                     {
                         qf->next = f->next;
-                        delete f;
+                        delete f; // 这句话可以不要
                     }
                 }
                 else
                 {
-                    s = new node(x.x, x.y);
+                    s = new node(x);
                     s->next = qf->next;
                     qf->next = s;
                 }
             }
             else
             {
-                s = new node(x.x, x.y);
-                s->next = qf->next;
+                s = new node(x);
                 qf->next = s;
+                qf = s;
             }
-
+            
             q = q->next;
         }
-
+        
         p = p->next;
+    }
+
+    node *plus = new node();
+    node *tp = plus;
+
+    p = l1->next;
+    q = l2->next;
+
+    while (p && q)
+    {
+        if (p->val.y == q->val.y)
+        {
+            int sum = p->val.x + q->val.x;
+
+            if (sum)
+            {
+                item x;
+
+                x.x = sum;
+                x.y = p->val.y; // x.y = q->val.y;
+                s = new node(x);
+                tp->next = s;
+                tp = s;
+            }
+
+            p = p->next;
+            q = q->next;
+        }
+        else if (p->val.y > q->val.y)
+        {
+            s = new node(p->val);
+            tp->next = s;
+            tp = s;
+            p = p->next;
+        }
+        else
+        {
+            s = new node(q->val);
+            tp->next = s;
+            tp = s;
+            q = q->next;
+        }
+    }
+
+    while (p)
+    {
+        s = new node(p->val);
+        tp->next = s;
+        tp = s;
+        p = p->next;
+    }
+
+    while (q)
+    {
+        s = new node(q->val);
+        tp->next = s;
+        tp = s;
+        q = q->next;
     }
 
     p = product->next;
 
-    if (p)
+    if (product->next) // if (p)也行
     {
         while (p)
         {
-            if (p == product->next)
-                cout << p->val.x << " " << p->val.y;
-            else
-                cout << " " << p->val.x << " " << p->val.y;
-            
+            if (p != product->next)
+                cout << " ";
+    
+            cout << p->val.x << " " << p->val.y;
             p = p->next;
         }
     }
     else
-    {
         cout << "0 0";
-    }
 
     cout << endl;
-
     p = plus->next;
 
-    if (p)
+    if (plus->next) // if (p)也行
     {
         while (p)
         {
-            if (p == plus->next)
-                cout << p->val.x << " " << p->val.y;
-            else
-                cout << " " << p->val.x << " " << p->val.y;
-
+            if (p != plus->next)
+                cout << " ";
+    
+            cout << p->val.x << " " << p->val.y;
             p = p->next;
         }
     }
     else
-    {
         cout << "0 0";
-    }
 
     cout << endl;
 
