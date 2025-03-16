@@ -11,7 +11,7 @@ int FactorialSum( List L )
         res = 1;
 
         for (int i = 1; i <= p->Data; i++)
-            res *= i;
+            res *= i; // i从2开始也行
 
         sum += res;
         p = p->Next;
