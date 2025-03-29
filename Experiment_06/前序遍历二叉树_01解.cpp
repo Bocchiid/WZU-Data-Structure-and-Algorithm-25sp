@@ -1,3 +1,5 @@
+/* 本题就是在构建二叉树的基础上, 增加了前序遍历 */
+
 #include <iostream>
 using namespace std;
 
