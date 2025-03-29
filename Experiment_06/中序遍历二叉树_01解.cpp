@@ -9,7 +9,7 @@ struct tnode
     tnode *left;
     tnode *right;
 
-    tnode(int val) : val(val), left(left), right(right) {}
+    tnode(int val) : val(val), left(nullptr), right(nullptr) {}
     tnode(int val, tnode *left, tnode *right) : val(val), left(left), right(right) {}
 };
 
