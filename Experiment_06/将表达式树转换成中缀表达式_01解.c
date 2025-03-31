@@ -49,6 +49,7 @@ int main()
     scanf("%s", val);
     tnode *root = createTnode(val, left, right);
     inorder(root, 1);
+    printf("\n");
 
     return 0;
 }
