@@ -1,7 +1,6 @@
 /* 本题就是在构建二叉树的基础上, 增加了计算树的深度 */
 
 #include <iostream>
-#include <queue>
 using namespace std;
 
 struct tnode
