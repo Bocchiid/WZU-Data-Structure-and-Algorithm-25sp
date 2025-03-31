@@ -41,6 +41,7 @@ int main()
     cin >> val;
     tnode *root = new tnode(val, left, right);
     inorder(root, 1);
+    cout << endl;
 
     return 0;
 }
