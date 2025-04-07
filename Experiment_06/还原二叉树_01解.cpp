@@ -42,10 +42,10 @@ tnode *buildTree(int b1, int e1, int b2, int e2)
     int cnt = p - b2; /* 左子树的结点的个数 */
 
     if (p != b2) /* 若还有左子树, 则构建左子树 */
-        root->left = buildTree(b1 + 1, b1 + cnt + 1, b2, p);
+        root->left = buildTree(b1 + 1, b1 + 1 + cnt, b2, p);
 
     if (p != e2 - 1) /* 若还有右子树, 则构建右子树 */
-        root->right = buildTree(b1 + cnt + 1, e1, p + 1, e2);
+        root->right = buildTree(b1 + 1 + cnt, e1, p + 1, e2);
 
     return root;
 }
