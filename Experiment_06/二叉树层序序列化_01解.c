@@ -23,6 +23,9 @@ tnode *createTnode(int val, tnode *left, tnode *right)
 
 void bfs(tnode *root)
 {
+    if (!root) // if (root == NULL)
+        return;
+    
     tnode *q[101];
     int head = 0;
     int tail = 0;
