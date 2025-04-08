@@ -39,7 +39,7 @@ BinTree Delete( BinTree BST, ElementType X )
                 BST->Data = temp->Data;
                 Delete(BST->Right, BST->Data);
                 /* 此处选择了将右子树的最小值替换的办法 */
-                /* 应该也可以选择将左子树的最大值替换的办法 */
+                /* 也可以选择将左子树的最大值替换的办法 */
             }
         }
         else if (BST->Data > X)
