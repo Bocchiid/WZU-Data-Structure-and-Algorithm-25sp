@@ -1,4 +1,5 @@
 /* 这道题的解法就是前序遍历 + 叶结点的判断 */
+/* 该解法为递归解法 */
 
 void PreorderPrintLeaves( BinTree BT )
 {
