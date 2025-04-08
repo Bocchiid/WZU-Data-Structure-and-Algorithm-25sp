@@ -17,7 +17,7 @@ struct tnode
 
 void preorder(tnode *root)
 {
-    if (!root)
+    if (!root) // if (root == nullptr)
         return;
 
     stack<tnode *> stk;
