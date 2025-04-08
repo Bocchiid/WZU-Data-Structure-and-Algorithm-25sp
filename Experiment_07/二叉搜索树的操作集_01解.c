@@ -1,3 +1,5 @@
+/* 两个解法仅在删除的结点有左右子树时不同, 其余部分相同 */
+
 BinTree Insert( BinTree BST, ElementType X )
 { /* 找到空结点, 即为插入的位置 */
     if (!BST) // if (BST == NULL)
