@@ -1,4 +1,5 @@
 /* 本题就是在构建二叉树的基础上, 增加了后序遍历 */
+/* 该解法为递归解法 */
 
 #include <stdio.h>
 #include <stdlib.h>
