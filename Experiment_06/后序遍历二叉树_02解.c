@@ -21,7 +21,7 @@ tnode *createTnode(int val, tnode *left, tnode *right)
     return s;
 }
 
-void preorder(tnode *root)
+void postorder(tnode *root)
 {
     if (!root) // if (root == NULL)
         return;
@@ -74,7 +74,7 @@ int main()
     tnode *right = createTnode(val, NULL, NULL);
     scanf("%d", &val);
     tnode *root = createTnode(val, left, right);
-    preorder(root);
+    postorder(root);
 
     return 0;
 }
