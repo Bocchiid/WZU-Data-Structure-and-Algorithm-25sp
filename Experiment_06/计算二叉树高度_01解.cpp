@@ -20,12 +20,8 @@ int getHeight(tnode *root)
 
     int leftHeight = getHeight(root->left);
     int rightHeight = getHeight(root->right);
-    int maxHeight = leftHeight;
 
-    if (rightHeight > maxHeight) // if (rightHeight > leftHeight)
-        maxHeight = rightHeight;
-
-    return maxHeight + 1;
+    return max(leftHeight, rightHeight) + 1;
 }
 
 int main()
