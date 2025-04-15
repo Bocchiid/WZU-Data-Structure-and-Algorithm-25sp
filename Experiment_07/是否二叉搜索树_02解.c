@@ -4,10 +4,10 @@ bool dfs(BinTree T, int lower, int upper)
 { /* 空树也是BST */
     if (!T) // if (T == NULL)
         return true;
-    /* 若不满足左大于根小于右的话, return false; */
+    /* 若不满足左小于根小于右的话, return false; */
     if (lower >= T->Data || upper <= T->Data)
         return false;
-    /* 递归左右子树是否满足BST */
+    /* 递归判断左右子树是否满足BST */
     return dfs(T->Left, lower, T->Data) &&
            dfs(T->Right, T->Data, upper);
 }
