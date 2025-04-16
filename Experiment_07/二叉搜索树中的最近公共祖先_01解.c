@@ -1,44 +1,26 @@
 /* 该解法为迭代解法 */
 /* 注意利用BST的性质 */
+/* 本题的坑, 得先判断两结点是否在树中 */
 
-int LCA( Tree T, int u, int v )
-{ /* 这道题的一个坑, 得先判断两个结点是否在树中能被找到 */
-    if (!T) // if (T == NULL)
-        return ERROR;
-    
-    int found1 = 0;
-    int found2 = 0;
-    /* 此处使用的是中序遍历的迭代实现 */
-    Tree stk[101];
-    int top = -1;
-    
-    Tree p = T;
-
-    while (p || top != -1)
-    {
-        if (p)
-        {
-            top++;
-            stk[top] = p;
-            p = p->Left;
-        }
-        else
-        {
-            p = stk[top];
-            top--;
-
-            if (p->Key == u)
-                found1 = 1;
-
-            if (p->Key == v)
-                found2 = 1;
-            
-            p = p->Right;
-        }
+int find(Tree root, int val)
+{ /* 利用BST的性质 */
+    while (root)
+    { /* 类似于二分查找, 查找指定结点 */
+        if (root->Key == val)
+            return 1;
+        else if (root->Key > val)
+            root = root->Left;
+        else if (root->Key < val) /* else */
+            root = root->Right;
     }
 
-    if (found1 && found2)
-    { /* 两结点都在树中, 才有最近公共祖先 */
+    return 0;
+}
+
+int LCA( Tree T, int u, int v )
+{
+    if (find(T, u) && find(T, v))
+    {
         while (T)
         {
             if (T->Key > u && T->Key > v)
@@ -51,8 +33,8 @@ int LCA( Tree T, int u, int v )
 
         if (T)
             return T->Key;
-        else
-            return ERROR;
+
+        return -1; /* 其实这个不写没事, 题目没有考虑 */
     }
 
     return ERROR;
