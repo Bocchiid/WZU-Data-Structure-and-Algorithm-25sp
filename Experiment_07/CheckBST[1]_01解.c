@@ -67,7 +67,7 @@ int CheckBST ( BinTree T, int K )
     if (isBST(T))
     {
         if (!T) // if (T == NULL)
-            return -1; /* 其实这个不写也没事, 本题似乎没有考虑 */
+            return -1; /* 其实这个不写也没事, 本题没有考虑 */
 
         BinTree stk[101];
         int top = -1;
@@ -95,7 +95,7 @@ int CheckBST ( BinTree T, int K )
             }
         }
 
-        return -1; /* 其实这个不写也没事, 本题似乎没有考虑 */
+        return -1; /* 其实这个不写也没事, 本题没有考虑 */
     }
     else
         return -getHeight(T);
