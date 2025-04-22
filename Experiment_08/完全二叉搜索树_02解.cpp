@@ -52,5 +52,7 @@ int main()
         cout << tree[i];
     }
 
+    cout << endl;
+
     return 0;
 }
