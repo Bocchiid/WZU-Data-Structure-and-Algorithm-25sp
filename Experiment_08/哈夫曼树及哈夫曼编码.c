@@ -44,15 +44,11 @@ void SelectTwoMin(int upbound, HuffmanTree HT, int &s1, int &s2)
             }
         }
     }
-
-    // if (s1 > s2)
-    //     swap(s1, s2);
 }
 void HuffmanCoding(HuffmanTree &HT, HuffmanCode &HC, int *w, int n)
 {
-    int i;
-    int m = 2 * n;
-    HT = (HuffmanTree)malloc(sizeof(HTNode) * m);
+    int i, j;
+    HT = (HuffmanTree)malloc(sizeof(HTNode) * (2 * n));
 
     for (i = 1; i <= n; i++)
     {
@@ -61,18 +57,17 @@ void HuffmanCoding(HuffmanTree &HT, HuffmanCode &HC, int *w, int n)
         HT[i].lchild = HT[i].rchild = 0;
     }
 
-    for (i = n + 1; i <= m - 1; i++)
+    for (i = n + 1; i <= 2 * n - 1; i++)
     {
         HT[i].parent = 0;
         HT[i].lchild = HT[i].rchild = 0;
     }
 
-    for (i = n + 1; i <= m - 1; i++)
+    for (i = n + 1; i <= 2 * n - 1; i++)
     {
         int s1, s2;
-
+        
         SelectTwoMin(i, HT, s1, s2);
-
         HT[i].weight = HT[s1].weight + HT[s2].weight;
         HT[i].lchild = s1;
         HT[i].rchild = s2;
@@ -80,18 +75,16 @@ void HuffmanCoding(HuffmanTree &HT, HuffmanCode &HC, int *w, int n)
         HT[s2].parent = i;
     }
 
-    int p;
-    int q;
+    int p, q;
 
-    HC = (HuffmanCode)malloc(sizeof(char *) * (n + 1));
-    
+    HC = (HuffmanCode)malloc(sizeof(char*) * (n + 1));
+
     for (i = 1; i <= n; i++)
     {
-        char s[1001] = {0};
+        char s[1001];
         int length = 0;
 
         p = i;
-        q = p;
 
         while (HT[p].parent != 0)
         {
@@ -110,13 +103,11 @@ void HuffmanCoding(HuffmanTree &HT, HuffmanCode &HC, int *w, int n)
             }
         }
 
-         for (int j = 0; j < length / 2; j++)
-         {
-             swap(s[j], s[length - 1 - j]);
-         }
+        for (j = 0; j < length / 2; j++)
+            swap(s[j], s[length - 1 - j]);
 
         s[length] = '\0';
-        HC[i] = (char *)malloc(sizeof(char) * (n + 1));
+        HC[i] = (char*)malloc(sizeof(char) * (length + 1));
         strcpy(HC[i], s);
     }
 }
