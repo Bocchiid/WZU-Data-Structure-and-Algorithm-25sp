@@ -1,11 +1,3 @@
-/* swap()进行了override(重载) */
-
-void swap(int &a, int &b)
-{
-    int temp = a;
-    a = b;
-    b = temp;
-}
 void swap(char &a, char &b)
 {
     char temp = a;
