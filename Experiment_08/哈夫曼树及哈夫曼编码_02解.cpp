@@ -1,3 +1,5 @@
+/* C++ string类的使用 */
+
 #include <iostream>
 using namespace std;
 
@@ -7,16 +9,10 @@ void swap(int &a, int &b)
     a = b;
     b = temp;
 }
-void swap(char &a, char &b)
-{
-    char temp = a;
-    a = b;
-    b = temp;
-}
 void SelectTwoMin(int upbound, HuffmanTree HT, int &s1, int &s2)
 {
-    int first = 1;
-    int second = 1;
+    bool first = true;
+    bool second = true;
 
     for (int i = 1; i < upbound; i++)
     {
@@ -25,14 +21,14 @@ void SelectTwoMin(int upbound, HuffmanTree HT, int &s1, int &s2)
             if (first)
             {
                 s1 = i;
-                first = 0;
+                first = false;
             }
             else
             {
                 if (second)
                 {
                     s2 = i;
-                    second = 0;
+                    second = false;
                 }
 
                 if (HT[i].weight < HT[s1].weight)
@@ -41,9 +37,7 @@ void SelectTwoMin(int upbound, HuffmanTree HT, int &s1, int &s2)
                     s1 = i;
                 }
                 else if (HT[i].weight < HT[s2].weight)
-                {
                     s2 = i;
-                }
             }
         }
     }
@@ -66,33 +60,33 @@ void HuffmanCoding(HuffmanTree &HT, HuffmanCode &HC, int *w, int n)
         HT[i].lchild = HT[i].rchild = 0;
     }
 
+    int s1, s2;
+
     for (i = n + 1; i <= 2 * n - 1; i++)
     {
-        int s1, s2;
-        
         SelectTwoMin(i, HT, s1, s2);
+
         HT[i].weight = HT[s1].weight + HT[s2].weight;
         HT[i].lchild = s1;
         HT[i].rchild = s2;
+
         HT[s1].parent = i;
         HT[s2].parent = i;
     }
 
     int p, q;
-
-    HC = (HuffmanCode)malloc(sizeof(char*) * (n + 1));
+    HC = (HuffmanCode)malloc(sizeof(char *) * (n + 1));
 
     for (i = 1; i <= n; i++)
     {
         string s;
-
         p = i;
 
         while (HT[p].parent != 0)
         {
             q = p;
             p = HT[p].parent;
-
+            /* 逆序建立字符串s */
             if (HT[p].lchild == q)
             {
                 s = '0' + s;
@@ -103,7 +97,7 @@ void HuffmanCoding(HuffmanTree &HT, HuffmanCode &HC, int *w, int n)
             }
         }
 
-        HC[i] = (char*)malloc(sizeof(char) * (s.size() + 1));
+        HC[i] = (char *)malloc(sizeof(char) * (s.size() + 1));
         strcpy(HC[i], s.c_str());
     }
 }
