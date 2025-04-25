@@ -1,3 +1,5 @@
+/* swap()进行了override(重载) */
+
 void swap(int &a, int &b)
 {
     int temp = a;
@@ -12,8 +14,8 @@ void swap(char &a, char &b)
 }
 void SelectTwoMin(int upbound, HuffmanTree HT, int &s1, int &s2)
 {
-    int first = 1;
-    int second = 1;
+    bool first = true;
+    bool second = true;
 
     for (int i = 1; i < upbound; i++)
     {
@@ -22,14 +24,14 @@ void SelectTwoMin(int upbound, HuffmanTree HT, int &s1, int &s2)
             if (first)
             {
                 s1 = i;
-                first = 0;
+                first = false;
             }
             else
             {
                 if (second)
                 {
                     s2 = i;
-                    second = 0;
+                    second = false;
                 }
 
                 if (HT[i].weight < HT[s1].weight)
@@ -38,9 +40,7 @@ void SelectTwoMin(int upbound, HuffmanTree HT, int &s1, int &s2)
                     s1 = i;
                 }
                 else if (HT[i].weight < HT[s2].weight)
-                {
                     s2 = i;
-                }
             }
         }
     }
@@ -63,21 +63,22 @@ void HuffmanCoding(HuffmanTree &HT, HuffmanCode &HC, int *w, int n)
         HT[i].lchild = HT[i].rchild = 0;
     }
 
+    int s1, s2;
+
     for (i = n + 1; i <= 2 * n - 1; i++)
     {
-        int s1, s2;
-        
         SelectTwoMin(i, HT, s1, s2);
+
         HT[i].weight = HT[s1].weight + HT[s2].weight;
         HT[i].lchild = s1;
         HT[i].rchild = s2;
+
         HT[s1].parent = i;
         HT[s2].parent = i;
     }
 
     int p, q;
-
-    HC = (HuffmanCode)malloc(sizeof(char*) * (n + 1));
+    HC = (HuffmanCode)malloc(sizeof(char *) * (n + 1));
 
     for (i = 1; i <= n; i++)
     {
@@ -102,12 +103,12 @@ void HuffmanCoding(HuffmanTree &HT, HuffmanCode &HC, int *w, int n)
                 length++;
             }
         }
-
+        /* Reverse string(逆转字符串) */
         for (j = 0; j < length / 2; j++)
             swap(s[j], s[length - 1 - j]);
 
         s[length] = '\0';
-        HC[i] = (char*)malloc(sizeof(char) * (length + 1));
+        HC[i] = (char *)malloc(sizeof(char) * (length + 1));
         strcpy(HC[i], s);
     }
 }
