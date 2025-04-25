@@ -1,9 +1,3 @@
-void swap(int &a, int &b)
-{
-    int temp = a;
-    a = b;
-    b = temp;
-}
 void SelectTwoMin(int upbound, HuffmanTree HT, int &s1, int &s2)
 {
     bool first = true;
