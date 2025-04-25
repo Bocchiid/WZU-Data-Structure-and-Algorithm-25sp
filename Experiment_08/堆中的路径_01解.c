@@ -1,7 +1,7 @@
 /* 由于二叉堆不唯一 */
 /* 本题请严格按照percolateUp(上滤/上升)调整建立二叉堆 */
 /* 01和02解的区别在于是否将数组作为函数形参 */
-/* 02解的实现是将数组作为形参处理 */
+/* 01解的实现是将数组作为函数形参 */
 
 #include <stdio.h>
 
@@ -11,33 +11,33 @@ void swap(int *a, int *b)
     *a = *b;
     *b = temp;
 }
-
-void percolateUp(int a[], int k)
+/* percolateUp()为6-1的02解实现 */
+void percolateUp(int a[], int p)
 {
-    while (k > 1)
+    while (p > 1)
     {
-        if (a[k / 2] > a[k])
+        if (a[p / 2] > a[p])
         {
-            swap(&a[k / 2], &a[k]);
-            k /= 2;
+            swap(&a[p / 2], &a[p]);
+            p /= 2;
         }
         else
             break;
     }
 }
 
-void print(int a[], int k)
+void print(int a[], int p)
 {
-    int flag = 1;
-
-    while (k >= 1)
+    int flag = 1; /* 用于格式控制 */
+    
+    while (p >= 1)
     {
         if (!flag)
             printf(" ");
 
-        printf("%d", a[k]);
-        k /= 2;
+        printf("%d", a[p]);
         flag = 0;
+        p /= 2;
     }
 
     printf("\n");
@@ -45,11 +45,11 @@ void print(int a[], int k)
 
 int main()
 {
-    int i;
+    int i, j;
     int n, m;
 
     scanf("%d %d", &n, &m);
-    int a[1001] = {0};
+    int a[1001];
 
     for (i = 1; i <= n; i++)
     {
