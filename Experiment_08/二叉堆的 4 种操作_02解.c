@@ -1,10 +1,7 @@
 /* 由于二叉堆不唯一 */
 /* 本题请严格按照percolateDown(下滤/下沉)调整建立二叉堆 */
 /* 01和02解的区别在于是否将数组作为函数形参 */
-/* 02解的实现是将数组作为全局变量 */
-
-/* 注: percolateUp为函数6-1的02解实现 */
-/* 注: percolateDown为函数6-1的02解实现 */
+/* 01解的实现是将数组作为全局变量 */
 
 #include <stdio.h>
 
@@ -16,32 +13,32 @@ void swap(int *a, int *b)
     *a = *b;
     *b = temp;
 }
-
-void percolateUp(int k)
+/* percolateUp()为6-1的02解实现 */
+void percolateUp(int p)
 {
-    while (k > 1)
+    while (p > 1)
     {
-        if (a[k / 2] > a[k])
+        if (a[p / 2] > a[p])
         {
-            swap(&a[k / 2], &a[k]);
-            k /= 2;
+            swap(&a[p / 2], &a[p]);
+            p /= 2;
         }
         else
             break;
     }
 }
-
-void percolateDown(int k, int size)
+/* percolateDown()为6-1的02解实现 */
+void percolateDown(int p, int size)
 {
-    for (int i = k * 2; i <= size; i *= 2)
+    for (int i = p * 2; i <= size; i *= 2)
     {
         if (i < size && a[i] > a[i + 1])
             i++;
 
-        if (a[i] < a[k])
+        if (a[i] < a[p])
         {
-            swap(&a[i], &a[k]);
-            k = i;
+            swap(&a[i], &a[p]);
+            p = i;
         }
         else
             break;
@@ -53,24 +50,27 @@ void Delete(int *size)
     a[1] = a[*size];
     (*size)--;
 
-    for (int i = *size / 2; i >= 1; i--)
-        percolateDown(i, *size);
+    percolateDown(1, *size);
 }
 
 int main()
 {
-    int i;
+    int i, j;
     int c;
     int n;
-    int x;
 
     scanf("%d", &c);
     scanf("%d", &n);
 
     for (i = 1; i <= n; i++)
+    {
         scanf("%d", &a[i]);
+        percolateUp(i);
+    }
 
+    int x;
     scanf("%d", &x);
+
     n++;
     a[n] = x;
     percolateUp(n);
