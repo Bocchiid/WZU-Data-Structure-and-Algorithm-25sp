@@ -1,38 +1,38 @@
 /* 由于二叉堆不唯一 */
 /* 本题请严格按照percolateUp(上滤/上升)调整建立二叉堆 */
 /* 01和02解的区别在于是否将数组作为函数形参 */
-/* 01解的实现是将数组作为形参处理 */
+/* 01解的实现是将数组作为函数形参 */
 
 #include <iostream>
 #include <vector>
 using namespace std;
-
-void percolateUp(vector<int> &a, int k)
+/* percolateUp()为6-1的02解实现 */
+void percolateUp(vector<int> &a, int p)
 {
-    while (k > 1)
+    while (p > 1)
     {
-        if (a[k / 2] > a[k])
+        if (a[p / 2] > a[p])
         {
-            swap(a[k / 2], a[k]);
-            k /= 2;
+            swap(a[p / 2], a[p]);
+            p /= 2;
         }
         else
             break;
     }
 }
 
-void print(vector<int> a, int k)
+void print(vector<int> &a, int p)
 {
-    bool flag = true;
-
-    while (k >= 1)
+    bool flag = true; /* 用于格式控制 */
+    
+    while (p >= 1)
     {
         if (!flag)
             cout << " ";
 
-        cout << a[k];
-        k /= 2;
+        cout << a[p];
         flag = false;
+        p /= 2;
     }
 
     cout << endl;
@@ -40,7 +40,7 @@ void print(vector<int> a, int k)
 
 int main()
 {
-    int i;
+    int i, j;
     int n, m;
 
     cin >> n >> m;
