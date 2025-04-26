@@ -4,7 +4,7 @@
 /* 该解法是利用顺序表实现完全二叉树 */
 
 /* 01和02解的区别在于是否将数组作为函数形参 */
-/* 01解的实现是将数组作为参数处理 */
+/* 01解的实现是将数组作为函数形参 */
 
 #include <iostream>
 #include <vector>
@@ -15,22 +15,22 @@ int n;
 int cnt;
 vector<int> tree(1001);
 
-void inorder(vector<int> a, int root)
+void inorder(vector<int> &a, int root)
 {
-    if (root > n)
-        return;
+    if (root <= n)
+    {
+        inorder(a, root * 2);
 
-    inorder(a, root * 2);
+        tree[root] = a[cnt];
+        cnt++;
 
-    tree[root] = a[cnt];
-    cnt++;
-
-    inorder(a, root * 2 + 1);
+        inorder(a, root * 2 + 1);
+    }
 }
 
 int main()
 {
-    int i;
+    int i, j;
 
     cin >> n;
     vector<int> a(n);
