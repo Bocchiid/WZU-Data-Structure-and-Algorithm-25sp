@@ -3,9 +3,7 @@
 /* 故该完全二叉树可由中序遍历得到 */
 /* 该解法是利用顺序表实现完全二叉树 */
 
-/* 01和02解的区别在于是否将数组作为函数形参 */
-/* 02解的实现是将数组作为全局变量 */
-/* 该解法的排序实现为快速排序 */
+/* 该解只是作者单纯想练练快排 */
 
 #include <stdio.h>
 
@@ -14,67 +12,61 @@ int cnt;
 int a[1001];
 int tree[1001];
 
-void swap(int *a, int *b)
-{
-    int temp = *a;
-    *a = *b;
-    *b = temp;
-}
-
 int partition(int left, int right)
 {
     int pivot = a[left];
 
     while (left < right)
     {
-        while (left < right && a[right] >= pivot)
+        while (left < right && a[right] > pivot)
             right--;
 
         a[left] = a[right];
 
-        while (left < right && a[left] <= pivot)
+        while (left < right && a[left] < pivot)
             left++;
 
         a[right] = a[left];
     }
 
-    a[left] = pivot;
-    return left;
+    a[left] = pivot; // a[right] = pivot;
+
+    return left; // return right;
 }
 
-void quickSort(int left, int right)
+void quicksort(int left, int right)
 {
     if (left < right)
     {
         int pivotPos = partition(left, right);
-        quickSort(left, pivotPos - 1);
-        quickSort(pivotPos + 1, right);
+        quicksort(left, pivotPos - 1);
+        quicksort(pivotPos + 1, right);
     }
 }
 
 void inorder(int root)
 {
-    if (root > n)
-        return;
+    if (root <= n)
+    {
+        inorder(root * 2);
 
-    inorder(root * 2);
+        tree[root] = a[cnt];
+        cnt++;
 
-    tree[root] = a[cnt];
-    cnt++;
-
-    inorder(root * 2 + 1);
+        inorder(root * 2 + 1);
+    }
 }
 
 int main()
 {
-    int i;
+    int i, j;
 
     scanf("%d", &n);
 
     for (i = 0; i < n; i++)
         scanf("%d", &a[i]);
 
-    quickSort(0, n - 1);
+    quicksort(0, n - 1);
 
     cnt = 0;
     inorder(1);
