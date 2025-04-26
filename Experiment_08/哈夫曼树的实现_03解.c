@@ -22,7 +22,7 @@ void init(int w[], tnode a[], int size)
         a[i].left = a[i].right = -1;
     }
 
-    for (i; i <= 2 * size - 1; i++)
+    for (i; i < 2 * size - 1; i++)
     {
         a[i].parent = -1;
         a[i].left = a[i].right = -1;
