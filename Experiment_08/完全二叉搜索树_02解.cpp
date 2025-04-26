@@ -18,20 +18,20 @@ vector<int> tree(1001);
 
 void inorder(int root)
 {
-    if (root > n)
-        return;
+    if (root <= n)
+    {
+        inorder(root * 2);
 
-    inorder(root * 2);
+        tree[root] = a[cnt];
+        cnt++;
 
-    tree[root] = a[cnt];
-    cnt++;
-
-    inorder(root * 2 + 1);
+        inorder(root * 2 + 1);
+    }
 }
 
 int main()
 {
-    int i;
+    int i, j;
 
     cin >> n;
     a.resize(n);
