@@ -7,54 +7,41 @@
 /* 02解的实现是将数组作为全局变量 */
 
 #include <stdio.h>
+#include <stdlib.h>
 
 int n;
 int cnt;
 int a[1001];
 int tree[1001];
 
-void swap(int *a, int *b)
+int cmp(void *a, void *b)
 {
-    int temp = *a;
-    *a = *b;
-    *b = temp;
-}
-
-void bubbleSort(int n)
-{
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n - i - 1; j++)
-        {
-            if (a[j] > a[j + 1])
-                swap(&a[j], &a[j + 1]);
-        }
-    }
+    return (*(int *)a) > (*(int *)b);
 }
 
 void inorder(int root)
 {
-    if (root > n)
-        return;
+    if (root <= n)
+    {
+        inorder(root * 2);
 
-    inorder(root * 2);
+        tree[root] = a[cnt];
+        cnt++;
 
-    tree[root] = a[cnt];
-    cnt++;
-
-    inorder(root * 2 + 1);
+        inorder(root * 2 + 1);
+    }
 }
 
 int main()
 {
-    int i;
+    int i, j;
 
     scanf("%d", &n);
 
     for (i = 0; i < n; i++)
         scanf("%d", &a[i]);
 
-    bubbleSort(n);
+    qsort(a, n, sizeof(int), cmp);
 
     cnt = 0;
     inorder(1);
