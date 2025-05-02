@@ -62,10 +62,7 @@ int main()
     int a[1001];
 
     for (i = 1; i <= n; i++)
-    {
         scanf("%d", &a[i]);
-        percolateUp(a, i);
-    }
 
     int x;
     scanf("%d", &x);
