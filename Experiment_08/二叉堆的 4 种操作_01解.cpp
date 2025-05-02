@@ -65,10 +65,7 @@ int main()
     vector<int> a(n + 2);
 
     for (i = 1; i <= n; i++)
-    {
         cin >> a[i];
-        percolateUp(a, i);
-    }
 
     int x;
     cin >> x;
