@@ -67,10 +67,7 @@ int main()
     a.resize(n + 2);
 
     for (i = 1; i <= n; i++)
-    {
         cin >> a[i];
-        percolateUp(i);
-    }
 
     int x;
     cin >> x;
