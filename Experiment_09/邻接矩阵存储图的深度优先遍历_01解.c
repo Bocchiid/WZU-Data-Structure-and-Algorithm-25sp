@@ -2,7 +2,7 @@
 
 void DFS( MGraph Graph, Vertex V, void (*Visit)(Vertex) )
 {
-    if (Visited[V])
+    if (Visited[V]) /** 后治理(判断) */
         return;
 
     Visit(V);
@@ -10,5 +10,5 @@ void DFS( MGraph Graph, Vertex V, void (*Visit)(Vertex) )
 
     for (int i = 0; i < Graph->Nv; i++)
         if (Graph->G[V][i] != INFINITY) /** 若可达, 就搜索 */
-            DFS(Graph, i, Visit);
+            DFS(Graph, i, Visit); /** 先污染(搜索) */
 }
