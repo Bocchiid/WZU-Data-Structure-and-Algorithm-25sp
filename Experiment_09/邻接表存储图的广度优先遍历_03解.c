@@ -1,3 +1,5 @@
+/** 该解法是从结点的视角来实现bfs */
+
 void BFS ( LGraph Graph, Vertex S, void (*Visit)(Vertex) )
 {
     if (Visited[S]) /** 若已经搜索过了, 就结束搜索 */
