@@ -1,3 +1,6 @@
+/** 01和02解的区别在于是否是函数式实现 */
+/** 01解为非函数式(大部分)实现 */
+
 #define vc vector
 
 #include <iostream>
