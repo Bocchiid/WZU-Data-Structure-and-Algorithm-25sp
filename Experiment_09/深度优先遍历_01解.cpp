@@ -6,6 +6,8 @@
 
 /** 本题较坑的点是要对边去重 */
 /** 该解法对去重, 使用的是set(hash)实现 */
+
+/** 除01解外, 其余解数组均为函数参数实现 */
 #define vc vector
 #define pb push_back
 
