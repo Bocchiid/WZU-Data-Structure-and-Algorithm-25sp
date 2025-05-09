@@ -31,18 +31,18 @@ int main()
     /** input */
     cin >> kMaxVertex >> no_edge_value;
     cin >> n >> m;
-
+    /** input vertex */
     vc<char> key(n);
 
     for (i = 0; i < n; i++)
         cin >> key[i];
-
+    /** input edge */
     vc<vc<int>> a(n, vc<int>(n, no_edge_value));
 
     for (i = 0; i < m; i++)
     {
         cin >> u >> v >> val;
-        a[u][v] = val;
+        a[u][v] = val; /** 根据题目的意思, 本题不会出现重复输入的边, 但题目表述未提及，不严谨 */
     }
 
     print(a, n); /** 输出矩阵 */
