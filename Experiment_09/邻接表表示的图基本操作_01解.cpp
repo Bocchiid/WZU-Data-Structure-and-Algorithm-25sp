@@ -48,7 +48,7 @@ int main()
     for (i = 0; i < m; i++)
     {
         cin >> u >> v >> val;
-        a[u].pb({v, val});
+        a[u].pb({v, val}); /** 根据题目的意思, 本题不会出现重复输入的边, 但题目表述未提及，不严谨 */
     }
     /** reverse edge */
     for (i = 0; i < n; i++)
