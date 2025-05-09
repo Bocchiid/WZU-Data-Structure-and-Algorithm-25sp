@@ -32,7 +32,7 @@ void printVertex(char key[], int size)
 }
 /** 插入边 */
 void insertEdge(int a[][1001], int u, int v, int val)
-{
+{ /** 根据题目的意思, 本题不会出现重复输入的边, 但题目表述未提及，不严谨 */
     a[u][v] = val;
 }
 /** 删除边 */
