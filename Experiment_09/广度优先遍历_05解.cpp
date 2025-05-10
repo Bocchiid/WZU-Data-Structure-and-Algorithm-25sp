@@ -40,14 +40,14 @@ void bfs(int v)
 
         for (int i = a[t].size() - 1; i >= 0; i--)
         {
-            int verx = a[t][i];
+            int vert = a[t][i];
 
-            if (!visited[verx])
+            if (!visited[vert])
             {
-                q.push(verx);
+                q.push(vert);
 
-                cout << key[verx];
-                visited[verx] = true;
+                cout << key[vert];
+                visited[vert] = true;
             }
         }
     }
