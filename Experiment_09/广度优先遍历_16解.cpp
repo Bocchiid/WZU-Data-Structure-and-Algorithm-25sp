@@ -10,7 +10,6 @@
 /** 奇数解为全局变量实现 */
 /** 偶数解为函数参数实现 */
 #define vc vector
-#define pb push_back
 
 #include <iostream>
 #include <vector>
