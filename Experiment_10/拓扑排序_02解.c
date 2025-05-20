@@ -99,5 +99,7 @@ int main()
     for (i = 0; i < n; i++)
         printf("%s ", key[order[i]]);
 
+    printf("\n");
+
     return 0;
 }
