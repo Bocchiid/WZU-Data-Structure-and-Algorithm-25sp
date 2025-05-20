@@ -25,7 +25,7 @@ bool topsort()
     int cnt = 0;
     /** make a queue */
     queue<int> q;
-    /** push items which ind equals zero */
+    /** push items whose ind equals zero */
     for (i = 0; i < n; i++)
         if (!ind[i])
             q.push(i);
@@ -42,7 +42,7 @@ bool topsort()
         for (auto v : a[u])
         {
             ind[v]--;
-            /** push items which ind equals zero */
+            /** push items whose ind equals zero */
             if (!ind[v])
                 q.push(v);
         }
