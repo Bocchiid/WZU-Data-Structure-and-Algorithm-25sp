@@ -38,7 +38,7 @@ void dijkstra(int s)
         /** 寻找距离最小且未被访问的结点 */
         for (j = 0; j < n; j++)
             if (!visited[j] && dist[j] < mind)
-            { /** 因为找最小距离结点为贪心, 所以不允许存在负边 */
+            { /** 因为寻找最小距离结点为贪心, 所以不允许存在负边 */
                 mind = dist[j];
                 u = j;
             }
@@ -46,10 +46,10 @@ void dijkstra(int s)
         visited[u] = true;
         /** 尝试更新邻接点的最小距离 */
         for (auto ed : a[u])
-        {                      /** u为起点 */
-            int v = ed.first;  /** v为终点 */
-            int w = ed.second; /** w为边权 */
-            /** 若经过u到达v的权比之前到达v的权小, 则更新 */
+        {
+            int v = ed.first;
+            int w = ed.second;
+            /** 若经过u到达v的权比之前到达v的权更小, 则更新 */
             if (dist[u] + w < dist[v])
             {
                 dist[v] = dist[u] + w;
@@ -61,7 +61,7 @@ void dijkstra(int s)
 
 int main()
 {
-    int i;
+    int i, j, k;
     /** input */
     cin >> n >> m;
     /** input edge */
