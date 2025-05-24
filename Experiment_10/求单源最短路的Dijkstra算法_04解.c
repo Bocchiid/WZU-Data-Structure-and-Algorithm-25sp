@@ -55,16 +55,13 @@ void dijkstra(int s)
         { /** Find edges with beginning vertex u */
             if (a[j].u == u)
             {
-                if (a[j].w != INF)
-                {
-                    int v = a[j].v;
-                    int w = a[j].w;
+                int v = a[j].v;
+                int w = a[j].w;
 
-                    if (dist[u] + w < dist[v])
-                    {
-                        dist[v] = dist[u] + w;
-                        path[v] = u;
-                    }
+                if (dist[u] + w < dist[v])
+                {
+                    dist[v] = dist[u] + w;
+                    path[v] = u;
                 }
             }
         }
