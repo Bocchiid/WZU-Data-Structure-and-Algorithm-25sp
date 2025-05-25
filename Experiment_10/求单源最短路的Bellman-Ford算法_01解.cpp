@@ -1,5 +1,5 @@
-/** 该解法的图存储为邻接表实现 */
-/** 该解法的邻接表为数组实现 */ 
+/** 该解法图的存储为邻接表实现 */
+/** 该解法的邻接表为数组实现 */
 
 #define vc vector
 #define pb push_back
@@ -14,68 +14,77 @@ int n, m;
 
 vc<vc<pair<int, int>>> a;
 vc<int> dist;
+vc<int> path;
 
-bool bellmanford(int s)
+bool bellman_ford(int s)
 {
-	int i, j;
-	int u;
-	/** init dist */
-	dist.assign(n, INF);
-	/** dist of source = 0 */
-	dist[s] = 0;
-	/** loop of (n -1)times */
-	for (i = 1; i < n; i++)
-	{ /** search for all edges */
-		for (u = 0; u < n; u++)
-		{ /** starting point u */
-			for (auto ed : a[u])
-			{ /** ending point v */
-				int v = ed.first;
-				int w = ed.second; /** weight w(cost from u to v) */
-				dist[v] = min(dist[v], dist[u] + w);
-				/** try to update dist of point v */
-			}
-		}
-	}
-    /** having done (n - 1)times, dist shouble be fixed */
-	/** do one more time */
-	for (u = 0; u < n; u++)
-	{ /** starting point u */
-		for (auto ed : a[u])
-		{ /** ending point v */
-			int v = ed.first;
-			int w = ed.second; /** weight w(cost from u to v) */
-			/** if there is a shorter dist, return false */
-			if (dist[u] + w < dist[v])
-				return false;
-		}
-	}
-	/** else return true */
-	return true;
+    int i, j;
+    /** Init dist */
+    dist.assign(n, INF);
+    /** Init path */
+    path.assign(n, -1);
+    /** Visit vertex s */
+    dist[s] = 0;
+    path[s] = -1;
+    /** Visit other vertexes */
+    for (i = 1; i < n; i++)
+    { /** Visit every edge */
+        for (j = 0; j < n; j++)
+        {
+            for (auto ed : a[j])
+            {
+                int u = j;
+                int v = ed.first;
+                int w = ed.second;
+                /** Try to update shortest dist */
+                if (dist[u] + w < dist[v])
+                {
+                    dist[v] = dist[u] + w;
+                    path[v] = u;
+                }
+            }
+        }
+    }
+    /** Check negative circle */
+    for (j = 0; j < n; j++)
+    {
+        for (auto ed : a[j])
+        {
+            int u = j;
+            int v = ed.first;
+            int w = ed.second;
+
+            if (dist[u] + w < dist[v])
+                return false;
+        }
+    }
+
+    return true;
 }
 
 int main()
 {
-	int i, j;
-	/** input */ 
-	cin >> n >> m;
-	/** input edge */
-	a.resize(n);
-	
-	for (i = 0; i < m; i++)
-	{
-		int u, v, w;
-		
-		cin >> u >> v >> w;
-		a[u].pb({v, w});
-	}
-	/** bellmanford with source of 0 */
-	bool flag = bellmanford(0);
-	/** output */
-	cout << "BF returns " << flag << endl;
-	/** output dist */
-	for (i = 0; i < n; i++)
-		cout << "dist[" << i << "] = " << dist[i] << endl;
-	
-	return 0;
+    int i, j;
+    /** Input */
+    cin >> n >> m;
+    /** Input edge */
+    /** Init a */
+    a.resize(n);
+
+    for (i = 0; i < m; i++)
+    {
+        int u, v, w;
+
+        cin >> u >> v >> w;
+        a[u].pb({v, w});
+    }
+    /** Do bellman_ford */
+    bool flag = bellman_ford(0);
+    /** Output */
+    cout << "BF returns " << flag << endl;
+    /** Output dist */
+    for (i = 0; i < n; i++)
+        cout << "dist[" << i << "] = " << dist[i] << endl;
+
+    return 0;
 }
