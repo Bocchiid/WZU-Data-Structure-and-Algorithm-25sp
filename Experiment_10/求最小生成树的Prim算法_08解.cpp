@@ -22,6 +22,8 @@ int prim(int s)
 {
     int i, j;
     int v;
+    /** Init parent */
+    parent.assign(n, 0);
     /** Init cost */
     cost.assign(n, INF);
     cost[s] = 0;
@@ -33,10 +35,9 @@ int prim(int s)
             int w = a[s][v];
             /** Actually, cost[s] == 0 */
             cost[v] = w; /** cost[v] = cost[s] + w */
+            parent[v] = s;
         }
     }
-    /** Init parent */
-    parent.assign(n, 0);
     /** Make weight */
     int weight = 0;
     /** Visit vertex s */
