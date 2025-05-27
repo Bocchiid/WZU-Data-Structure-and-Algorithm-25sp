@@ -102,6 +102,7 @@ int main()
     /** Input */
     cin >> n >> m;
     /** Input edge */
+    /** Init a */
     a.resize(n + 1);
 
     for (i = 0; i < m; i++)
