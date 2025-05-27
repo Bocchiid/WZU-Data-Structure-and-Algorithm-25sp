@@ -1,4 +1,5 @@
 /** 本题其实就是7-3prim算法的实现 */
+/** 由于题目不要求输出树的序列, 故不需要parent数组 */
 
 /** 该解法图的存储为邻接矩阵实现 */
 /** 该解法的prim为堆优化实现 */
@@ -17,7 +18,6 @@ int n, m;
 
 int a[1001][1001];
 int cost[1001];
-int parent[1001];
 /** Heap */
 vertex pq[10001];
 int size;
@@ -92,9 +92,6 @@ int prim(int s)
 {
     int i, j;
     int v;
-    /** Init parent */
-    for (i = 1; i <= n; i++)
-        parent[i] = 1;
     /** Make heap */
     init();
     /** Init cost */
@@ -125,7 +122,6 @@ int prim(int s)
     weight += cost[s];
     cost[s] = 0;
     cnt++;
-    parent[s] = -1;
 
     while (size != 0)
     { /** Get min cost vertex u */
@@ -147,7 +143,6 @@ int prim(int s)
                 if (w < cost[v]) /** cost[u] + w < cost[v] */
                 {
                     cost[v] = w; /** cost[v] = cost[u] + w */
-                    parent[v] = u;
                     /** Push vertex whose min cost was updated */
                     vertex x;
                     x.cost = cost[v];
