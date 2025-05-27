@@ -1,4 +1,5 @@
 /** 本题其实就是7-3prim算法的实现 */
+/** 由于题目不要求输出树的序列, 故不需要parent数组 */
 
 /** 该解法图的存储为直接存储边实现 */
 /** 该解法的prim为堆优化实现 */
@@ -37,13 +38,10 @@ int n, m;
 
 vc<edge> a;
 vc<int> cost;
-vc<int> parent;
 
 int prim(int s)
 {
     int i, j;
-    /** Init parent */
-    parent.assign(n + 1, 1);
     /** Make heap */
     priority_queue<pair<int, int>, vc<pair<int, int>>, cmp> pq;
     /** Init cost */
@@ -70,7 +68,6 @@ int prim(int s)
     weight += cost[s];
     cost[s] = 0;
     cnt++;
-    parent[s] = -1;
 
     while (!pq.empty())
     { /** Get min cost vertex u */
@@ -94,7 +91,6 @@ int prim(int s)
                 if (w < cost[v]) /** cost[u] + w < cost[v] */
                 {
                     cost[v] = w; /** cost[v] = cost[u] + w */
-                    parent[v] = u;
                     /** Push vertex whose min cost was updated */
                     pq.push({cost[v], v});
                 }
