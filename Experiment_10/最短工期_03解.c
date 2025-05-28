@@ -1,0 +1,115 @@
+/** 本题其实就是topsort的实现 + 最早完成时间的计算 */
+/** 由于题目不要求输出拓扑序列, 故不需要order数组 */
+
+/** 该解法图的存储为邻接矩阵实现 */
+
+#define INF 0x3f3f3f3f
+
+#include <stdio.h>
+
+int max(int a, int b)
+{
+    if (a > b)
+        return a;
+
+    return b;
+}
+
+int n, m;
+
+int a[101][101];
+int ind[101];
+int elist[101];
+
+int topsort()
+{
+    int i, j;
+    int v;
+    /** Init elist */
+    for (i = 0; i < n; i++)
+        elist[i] = 0;
+    /** Make counting */
+    int cnt = 0;
+    /** Make maxtime */
+    int maxtime = 0;
+    /** Make a queue */
+    int q[10001];
+    int head = 0;
+    int tail = 0;
+    /** Push vertex whose ind equals zero */
+    for (i = 0; i < n; i++)
+        if (!ind[i])
+        {
+            q[tail] = i;
+            tail++;
+        }
+
+    while (head != tail)
+    { /** Get vertex u whose ind equals zero */
+        int u = q[head];
+        head++;
+        /** Counting++ */
+        cnt++;
+        /** Try to update maxtime */
+        maxtime = max(maxtime, elist[u]);
+        /** Reduce ind */
+        for (v = 0; v < n; v++)
+        {
+            if (a[u][v] != INF)
+            {
+                int w = a[u][v];
+                /** Try to update elist */
+                elist[v] = max(elist[v], elist[u] + w);
+                ind[v]--;
+                /** Push vertex whose ind equals zero */
+                if (!ind[v])
+                {
+                    q[tail] = v;
+                    tail++;
+                }
+            }
+        }
+    }
+
+    if (cnt == n)
+        return maxtime;
+
+    return -1;
+}
+
+int main()
+{
+    int i, j;
+    /** Input */
+    scanf("%d %d", &n, &m);
+    /** Input edge */
+    /** Init a */
+    for (i = 0; i < n; i++)
+    {
+        for (j = 0; j < n; j++)
+        {
+            a[i][j] = INF;
+        }
+    }
+    /** Init ind */
+    for (i = 0; i < n; i++)
+        ind[i] = 0;
+
+    for (i = 0; i < m; i++)
+    {
+        int u, v, w;
+
+        scanf("%d %d %d", &u, &v, &w);
+        a[u][v] = w;
+        ind[v]++;
+    }
+    /** Do topsort */
+    int maxtime = topsort();
+    /** Output */
+    if (maxtime != -1)
+        printf("%d\n", maxtime);
+    else
+        printf("Impossible\n");
+
+    return 0;
+}
