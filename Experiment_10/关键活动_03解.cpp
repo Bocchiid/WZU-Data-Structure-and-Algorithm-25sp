@@ -80,7 +80,6 @@ int topsortE()
 int topsortL(int maxtime)
 {
     int i, j;
-    int v;
     /** Init llist */
     llist.assign(n + 1, maxtime);
     /** Make counting */
@@ -128,7 +127,6 @@ int topsortL(int maxtime)
 int main()
 {
     int i, j;
-    int v;
     /** Input */
     cin >> n >> m;
     /** Init ind */
