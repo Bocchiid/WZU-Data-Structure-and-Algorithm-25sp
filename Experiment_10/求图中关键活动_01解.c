@@ -4,8 +4,6 @@
 /** 该解法图的存储为邻接表实现 */
 /** 该解法的邻接表为链表实现 */
 
-#define INF 0x3f3f3f3f
-
 #include <stdio.h>
 #include <stdlib.h>
 
