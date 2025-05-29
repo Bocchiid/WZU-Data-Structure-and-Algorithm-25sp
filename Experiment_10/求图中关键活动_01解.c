@@ -169,7 +169,6 @@ int topsortL(int maxtime)
 int main()
 {
     int i, j;
-    int v;
     /** Input */
     scanf("%d %d", &n, &m);
     /** Init a */
