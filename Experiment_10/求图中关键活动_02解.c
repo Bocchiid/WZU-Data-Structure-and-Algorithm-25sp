@@ -3,8 +3,6 @@
 
 /** 该解法图的存储为直接存储边实现 */
 
-#define INF 0x3f3f3f3f
-
 #include <stdio.h>
 
 typedef struct edge
