@@ -42,7 +42,6 @@ int main()
     for (i = 0; i < n; i++)
     {
         int num;
-        int pos;
 
         scanf("%d", &num);
         insert(a, l, num);
